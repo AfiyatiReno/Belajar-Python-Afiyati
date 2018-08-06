@@ -1,0 +1,31 @@
+import re
+from typing import TextIO
+
+import tweepy
+from tweepy import OAuthHandler
+
+consumer_key = 'ncYhcejGrpdLrMBxUpitEslpP'
+consumer_secret = 'oYQJlx6Ku1nuF7qqOH8JrqLsNWrmwhCpuxbSwnVdAjmLlePfMK'
+access_token = '112175244-x7hUtKLhHs0jYDoQEBu2PiDe1epY8tC4szLq251d'
+access_secret = 'cYSmVQllRk02s1YUwaSiNpWn8pt5jsuVxmyRzh20jUElc'
+
+auth = OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_secret)
+
+api = tweepy.API(auth)
+
+api = tweepy.API(auth)
+fileku = open('databaru.txt', 'w')
+
+for status in tweepy.Cursor(api.home_timeline).items(100):
+
+    fileku.write(status.text)
+    fileku.write("=====\n")
+    #status.text = re.sub(r'http\S+', '', string='')
+
+fileku.close()
+
+
+fileku = open('databaru.txt', 'r')
+print fileku.readlines()
+fileku.close()
